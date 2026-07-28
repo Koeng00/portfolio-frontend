@@ -1,0 +1,50 @@
+<section class="hero">
+  <div class="hero-inner">
+    <div class="status-line">
+      <span class="status-dot"></span>
+      <span>open to junior backend roles</span>
+    </div>
+
+    <h1 class="hero-title">Tongkoeng Suon</h1>
+    <p class="hero-subtitle">
+      Backend Developer — Java &amp; Spring Boot<br />
+      building full-stack fluency with Angular and FastAPI
+    </p>
+
+    <div class="json-panel">
+      <div class="json-panel-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="json-panel-title">about.json</span>
+      </div>
+      <pre class="json-body"><code>{{ '{' }}
+        "name": "Tongkoeng Suon",
+        "role": "Backend Developer",
+        "location": "Phnom Penh, KH",
+        "focus": "Java / Spring Boot",
+        "learning": ["Angular", "TypeScript", "FastAPI"],
+        "status": "open_to_work"<span class="cursor">_</span>
+{{ '}' }}</code></pre>
+    </div>
+  </div>
+</section>
+
+<section class="stack">
+  <div class="stack-header">
+    <h2>Tech Stack</h2>
+    <span class="stack-count">{{ coreCount }} core · {{ growingCount }} growing</span>
+  </div>
+
+  <div class="stack-grid">
+    <div class="stack-item" *ngFor="let tech of techStack">
+      <span
+        class="stack-dot"
+        [class.core]="tech.category === 'core'"
+        [class.growing]="tech.category === 'growing'"
+      ></span>
+      <span class="stack-name">{{ tech.name }}</span>
+      <span class="stack-label">{{ tech.category }}</span>
+    </div>
+  </div>
+</section>
