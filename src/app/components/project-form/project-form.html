@@ -1,0 +1,29 @@
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="project-form">
+  <div class="field">
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="title" />
+    <span class="error" *ngIf="projectForm.get('title')?.invalid && projectForm.get('title')?.touched">
+      Title is required
+    </span>
+  </div>
+
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea id="description" formControlName="description"></textarea>
+    <span class="error" *ngIf="projectForm.get('description')?.invalid && projectForm.get('description')?.touched">
+      Description is required
+    </span>
+  </div>
+
+  <div class="field">
+    <label for="techStack">Tech Stack (comma-separated)</label>
+    <input id="techStack" type="text" formControlName="techStack" placeholder="Angular, Spring Boot, Docker" />
+  </div>
+
+  <div class="field">
+    <label for="githubUrl">GitHub URL (optional)</label>
+    <input id="githubUrl" type="text" formControlName="githubUrl" />
+  </div>
+
+  <button type="submit" [disabled]="projectForm.invalid">Add Project</button>
+</form>

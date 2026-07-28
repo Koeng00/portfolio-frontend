@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Project } from '../models/project.model';
 
 @Injectable({
@@ -6,24 +8,28 @@ import { Project } from '../models/project.model';
 })
 export class ProjectService {
 
-  private projects: Project[] = [
-    {
-      id: 1,
-      title: 'Portfolio Site',
-      description: 'A personal portfolio built with Angular and Spring Boot',
-      techStack: ['Angular', 'TypeScript', 'Spring Boot'],
-      githubUrl: 'https://github.com/tkcoder/portfolio'
-    },
-    {
-      id: 2,
-      title: 'University Management System',
-      description: 'Backend system with JWT auth and course management',
-      techStack: ['Java', 'Spring Boot', 'PostgreSQL']
-    }
-  ];
+  private apiUrl = 'http://localhost:8080/api/v1/projects';
 
-  getProjects() :Project[]
+  constructor(private http: HttpClient){}
+
+  getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.apiUrl)
+  }
+
+  getProjectById(id: number): Observable<Project>{
+    return this.http.get<Project>(`${this.apiUrl}/${id}`)
+  }
+
+  createProject(project: Omit<Project, 'id'>): Observable<Project>{
+    return this.http.post<Project>(this.apiUrl, project);
+  }
+
+  updateProject(id: number, project: Project): Observable<Project>
   {
-    return this.projects;
+    return this.http.put<Project>(`${this.apiUrl}/${id}`, project)
+  }
+
+  deleteProject(id: number): Observable<void>{
+    return this.http.delete<void>(`${this.apiUrl}/${id}`)
   }
 }
